@@ -25,7 +25,6 @@ public class ExplorerSearchTest {
     // Add more tests here!
     // Come up with varied cases
 
- 
     @Test
     public void findExplorerFirstRowFirstColumn() {
         int[][] island = {
@@ -40,7 +39,7 @@ public class ExplorerSearchTest {
         assertArrayEquals(expected, actual);
     }
 
-     @Test
+    @Test
     public void findExplorerMiddleRowMiddleColumn() {
         int[][] island = {
             {2,3,2,3,3},
@@ -101,7 +100,6 @@ public class ExplorerSearchTest {
         });
         assertEquals("No explorer found", exception.getMessage()); 
     }
-
     
     @Test
     public void testPossibleToExploreCenterStartAllDirectionsOpen() {
@@ -266,8 +264,4 @@ public class ExplorerSearchTest {
         }
         return set;
     }
-
 }
-    
-
-   
