@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -24,6 +23,73 @@ public class ExplorerSearchTest {
 
     // Add more tests here!
     // Come up with varied cases
+
+    @Test
+    public void testReachableArea_AllReachable() {
+        int[][] island = {
+            {0,1,1,1,1,1},
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(30, actual);
+    }
+
+    @Test
+    public void testReachableArea_OnlyStartingLocationReachable() {
+        int[][] island = {
+            {3,3,3,3,3,3},
+            {3,3,3,3,3,3},
+            {3,3,3,3,3,3},
+            {3,3,3,3,0,3},
+            {3,3,3,3,3,3},
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void testReachableArea_OnlyBorderReachable() {
+        int[][] island = {
+            {1,1,1,1,1,1},
+            {1,2,2,2,2,1},
+            {1,2,3,3,2,1},
+            {1,2,2,2,2,1},
+            {1,1,0,1,1,1},
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(18, actual);
+    }
+
+    @Test
+    public void testReachableArea_OnlyDiagonalFields() {
+        int[][] island = {
+            {2,1,2,1,2,1},
+            {1,2,1,2,1,2},
+            {2,1,2,1,2,1},
+            {1,2,1,2,1,2},
+            {2,1,2,1,2,0},
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void testReachableArea_NoExplorer() {
+        int[][] island = {
+            {1,1,1,3,1,1},
+            {3,2,3,1,3,1},
+            {1,1,1,1,3,3},
+            {3,1,2,3,3,3},
+            {1,1,1,2,3,1},
+        };
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ExplorerSearch.reachableArea(island);
+        });
+        assertEquals("No explorer found", exception.getMessage()); 
+    }
 
     @Test
     public void findExplorerFirstRowFirstColumn() {
