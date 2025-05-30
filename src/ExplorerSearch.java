@@ -18,7 +18,6 @@ public class ExplorerSearch {
             {1,1,3,3,1,0},
         };
         
-        
         System.out.println("Total Spaces Explored: " + reachableArea(island1));
         System.out.println("Total Spaces Explored: " + reachableArea(island2));
     }
