@@ -7,7 +7,7 @@ public class ExplorerSearch {
      * Returns how much land area an explorer can reach on a rectangular island.
      * 
      * The island is represented by a rectangular int[][] that contains
-     * ONLY the following nunbers:
+     * ONLY the following numbers:
      * 
      * '0': represents the starting location of the explorer
      * '1': represents a field the explorer can walk through
@@ -45,5 +45,41 @@ public class ExplorerSearch {
             }
         }
         throw new IllegalArgumentException("No explorer found");
+    }
+
+    public static List<int[]> possibleToExplore(int[][] island, int[] current) {
+        List<int[]> explorable = new ArrayList<>();
+        int curR = current[0];
+        int curC = current[1];
+        explorable.add(new int[]{curR, curC});
+        
+        // up
+        int newR = curR -1;
+        int newC = curC;
+        if(newR >= 0 && island[newR][newC] == 1) {
+           explorable.add(new int[]{newR, newC});
+        }
+
+        // down
+        newR = curR +1;
+        newC = curC;
+        if(newR < island.length && island[newR][newC] == 1) {
+            explorable.add(new int[]{newR, newC});
+       }
+
+       // left
+        newR = curR;
+        newC = curC -1;
+        if(newC >=0 && island[newR][newC] == 1) {
+            explorable.add(new int[]{newR, newC});
+       }
+
+        // right
+        newR = curR;
+        newC = curC +1;
+        if(newC <island[newR].length && island[newR][newC] == 1) {
+            explorable.add(new int[]{newR, newC});
+       }
+       return explorable;
     }
 }
