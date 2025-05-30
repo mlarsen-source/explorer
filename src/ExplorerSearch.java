@@ -3,6 +3,26 @@ import java.util.List;
 
 public class ExplorerSearch {
 
+    public static void main(String[] args) {
+        int[][] island1 = {
+            {0,1,1,2,1,1},
+            {2,1,1,2,1,3},
+            {2,1,2,2,1,3},
+            {3,1,1,1,1,3},
+        };
+
+        int[][] island2 = {
+            {3,1,3,3,1,3},
+            {3,1,3,3,1,3},
+            {3,1,1,1,1,3},
+            {1,1,3,3,1,0},
+        };
+        
+        
+        System.out.println("Total Spaces Explored: " + reachableArea(island1));
+        System.out.println("Total Spaces Explored: " + reachableArea(island2));
+    }
+
     /**
      * Returns how much land area an explorer can reach on a rectangular island.
      * 
@@ -32,7 +52,27 @@ public class ExplorerSearch {
         // Implement your method here!
         // Please also make more test cases
         // I STRONGLY RECOMMEND testing some helpers you might make too
-        return -1;
+        int[] start = findExplorer(island);
+        boolean[][] visited = new boolean[island.length][island[0].length];
+        return reachableArea(island, start, visited);
+    }
+
+    public static int reachableArea(int[][] island, int[]current, boolean[][] visited) {
+        PrettyPrint.prettyPrintln(current);
+        PrettyPrint.prettyPrintln(visited);
+       
+        int curR = current[0];
+        int curC = current[1];
+        
+        if (visited[curR][curC]) return 0;
+        visited[curR][curC] = true;
+
+        int count = 1;
+        List<int[]> neighbors = possibleToExplore(island, current);
+        for(int[] neighbor : neighbors) { 
+            count+= reachableArea(island, neighbor, visited);
+        }
+        return count;
     }
 
     public static int[] findExplorer(int[][] island) {
